@@ -8,7 +8,7 @@ function AlertMsg(props) {
     return lower.charAt(0).toUpperCase() + lower.slice(1);
   }
     return (
-      props.alert && <Alert id='alert' className='text-center mx-5 border border-2 border-danger' variant={`${props.alert.type} + ${props.alert.border}`}>
+      props.alert && <Alert id='alert' className='text-center mx-5 border border-2 border-danger' variant={`${props.alert.type}`}>
         <p>
           {capitalize(props.alert.type)}: {props.alert.msg}  
         </p>
