@@ -1,4 +1,4 @@
-/*! For license information please see main.7e672cdf.js.LICENSE.txt */
+/*! For license information please see main.e4ff0328.js.LICENSE.txt */
 !(function () {
   var e = {
       694: function (e, t) {
@@ -11293,7 +11293,7 @@
         Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }),
         Object.defineProperty(e, "__esModule", { value: !0 });
     }),
-    (n.p = "/"),
+    (n.p = "/portfolio/"),
     (function () {
       "use strict";
       var e = n(791),
@@ -16012,8 +16012,8 @@
             e.alert &&
             (0, S.jsx)(ko, {
               id: "alert",
-              className: "text-center mx-5 border border-5",
-              variant: "".concat(e.alert.type, " + ").concat(e.alert.border),
+              className: "text-center mx-5 border border-2 border-danger",
+              variant: "".concat(e.alert.type),
               children: (0, S.jsxs)("p", {
                 children: [
                   (function (e) {
@@ -16217,6 +16217,7 @@
         };
       r.createRoot(document.getElementById("root")).render(
         (0, S.jsx)(ra, {
+          basename: "/portfolio",
           children: (0, S.jsxs)("div", {
             className: "main",
             children: [
@@ -16241,4 +16242,4 @@
       );
     })();
 })();
-//# sourceMappingURL=main.7e672cdf.js.map
+//# sourceMappingURL=main.e4ff0328.js.map
