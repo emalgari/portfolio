@@ -276,7 +276,16 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
  * --------------------------------------------------------------- */
 
 const projects = [
-  { index: '01', title: 'Case Study 01', kind: 'Landing page',     comingSoon: true, href: './work/case-study-01/' },
+  {
+    index: '01',
+    title: 'Aurelle',
+    kind: 'Luxury jewellery maison',
+    desc: 'A high-end concept site for a Lyon jewellery house — stone tabs, lightbox, validated inquiry form. Zero dependencies.',
+    tags: ['HTML', 'CSS', 'Vanilla JS'],
+    href: './work/aurelle/',
+    thumb: 'linear-gradient(135deg, #081611 0%, #0F2A21 45%, #C9A96A 100%)',
+    comingSoon: false,
+  },
   { index: '02', title: 'Case Study 02', kind: 'Product showcase', comingSoon: true, href: './work/case-study-02/' },
   { index: '03', title: 'Case Study 03', kind: 'Interactive 3D',   comingSoon: true, href: './work/case-study-03/' },
   { index: '04', title: 'Case Study 04', kind: 'Frontend rebuild', comingSoon: true, href: './work/case-study-04/' },
