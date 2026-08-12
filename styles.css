@@ -1,0 +1,289 @@
+/*
+ * The Atelier — styles
+ * Silk-field background, grain, cursor, masks, marquee,
+ * handwritten annotations, portrait, placeholders, responsiveness.
+ */
+
+* { cursor: none; }
+
+html {
+  background-color: #0a0a0c;
+  scrollbar-color: rgba(232, 228, 220, 0.25) #0a0a0c;
+}
+
+html, body { overflow-x: clip; }
+
+/* --- Three.js background --- */
+#bg-container { z-index: 0; pointer-events: none; }
+#bg-container canvas { display: block; opacity: 0.85; }
+
+/* --- vignette for depth --- */
+.vignette {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(10, 10, 12, 0.7) 100%);
+}
+
+/* --- film grain --- */
+.noise {
+  position: fixed; inset: 0; z-index: 2; pointer-events: none;
+  opacity: 0.07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* --- custom cursor --- */
+.cursor-ring,
+.cursor-dot {
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 100;
+  border-radius: 9999px;
+  mix-blend-mode: difference;
+  transform: translate3d(-50%, -50%, 0);
+}
+.cursor-ring {
+  width: 40px; height: 40px;
+  border: 1px solid #e8e4dc;
+  transition: width .3s cubic-bezier(.22,1,.36,1), height .3s cubic-bezier(.22,1,.36,1),
+              border-color .3s, background-color .3s;
+}
+.cursor-dot { width: 5px; height: 5px; background: #e8e4dc; }
+.cursor-ring.is-hovering {
+  width: 70px; height: 70px;
+  background: rgba(255, 92, 31, 0.15);
+  border-color: #ff5c1f;
+}
+
+/* --- hero line-mask (padding keeps the underline visible) --- */
+.line-mask { overflow: hidden; display: block; padding-bottom: 0.35em; margin-bottom: -0.35em; }
+.line-mask > span { display: inline-block; transform: translateY(110%); position: relative; }
+
+/* --- eyebrow label --- */
+.eyebrow { opacity: 0; }
+
+/* --- portrait --- */
+.portrait { position: relative; width: min(320px, 72vw); }
+.portrait-frame {
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid rgba(232, 228, 220, 0.2);
+  box-shadow: 0 0 80px rgba(255, 92, 31, 0.12);
+}
+.portrait-frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(25%) contrast(1.05);
+  transition: transform 1.2s cubic-bezier(.22, 1, .36, 1);
+}
+.portrait:hover .portrait-frame img { transform: scale(1.05); }
+
+/* dashed ring with one orbiting ember — slow, quiet, alive */
+.portrait-ring {
+  /* ring width = photo width + 2×16px offset, so the dot's orbit
+     always matches the ring, on every screen size */
+  --size: calc(min(320px, 72vw) + 32px);
+
+  position: absolute;
+  top: -16px; left: -16px; right: -16px;
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  border: 1px dashed rgba(255, 92, 31, 0.5);
+  /* no animation here — the ring stays perfectly still */
+}
+
+/* the ember: sits at the ring's edge and revolves around it */
+.portrait-ring::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 12px; height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 9999px;
+  background: #ff5c1f;
+  box-shadow: 0 0 16px #ff5c1f;
+  animation: revolve 14s linear infinite;
+}
+
+@keyframes revolve {
+  from { transform: rotate(0turn)   translateY(calc(var(--size) / -2)); }
+  to   { transform: rotate(1turn)   translateY(calc(var(--size) / -2)); }
+}
+
+.portrait-note {
+  margin-top: 2rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 1.4rem; transform: rotate(-3deg);
+}
+.portrait-note svg { width: 1.6rem; height: 1.6rem; position: static; }
+
+/* --- marquee --- */
+.marquee {
+  display: flex; width: max-content; gap: 3rem; padding-right: 3rem;
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  color: rgba(232, 228, 220, 0.6);
+  animation: marquee 40s linear infinite;
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* --- gallery cards (live projects) --- */
+.gallery-card {
+  flex: 0 0 440px; height: 560px;
+  border-radius: 1.25rem;
+  background: rgba(232, 228, 220, 0.03);
+  border: 1px solid rgba(232, 228, 220, 0.12);
+  overflow: hidden; position: relative;
+  transition: border-color .5s;
+}
+.gallery-card:hover { border-color: rgba(255, 92, 31, 0.5); }
+.gallery-card .thumb {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: .7;
+  transition: transform .8s cubic-bezier(.22,1,.36,1), opacity .5s;
+}
+.gallery-card:hover .thumb { transform: scale(1.05); opacity: .95; }
+.gallery-card .meta {
+  position: absolute; inset: auto 0 0 0; padding: 2rem;
+  background: linear-gradient(to top, rgba(10,10,12,.95), transparent);
+}
+
+/* --- placeholder cards (coming soon) --- */
+.placeholder-card {
+  flex: 0 0 440px; height: 560px;
+  border-radius: 1.25rem;
+  border: 1px dashed rgba(232, 228, 220, 0.2);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 2rem;
+  transition: border-color .5s;
+}
+.placeholder-card:hover { border-color: rgba(255, 92, 31, 0.4); }
+.placeholder-card .ghost {
+  position: absolute; right: 1rem; bottom: -2rem;
+  font-family: "Instrument Serif", serif;
+  font-size: 16rem; line-height: 1;
+  color: rgba(232, 228, 220, 0.05);
+  user-select: none;
+}
+
+/* --- reveal on scroll --- */
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 1s ease, transform 1s cubic-bezier(.22,1,.36,1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* --- interactive hover --- */
+[data-hover] {
+  transition: color .3s, transform .4s cubic-bezier(.22,1,.36,1);
+  display: inline-block;
+}
+[data-hover]:hover { color: #ff5c1f; transform: translateX(6px); }
+
+/* --- handwritten annotations --- */
+.hand { font-family: 'Caveat', cursive; color: #ff5c1f; }
+
+.annotation { position: relative; display: inline-block; }
+
+.mark { position: absolute; pointer-events: none; overflow: visible; }
+.mark path {
+  fill: none;
+  stroke: #ff5c1f;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.mark.underline { left: -3%; bottom: -0.3em; width: 106%; height: 0.5em; }
+/* circle tuned for body-size words, emalgari */
+.mark.fit-name {
+  left: -18%; top: -24%; width: 136%; height: 148%;
+  /* ↑ keep whatever values currently look right on emalgari */
+}
+
+/* circle tuned for the giant headline word, forwarding. */
+.mark.fit-heading {
+  left: -10%; top: -15%; width: 118%; height: 130%;
+}
+
+.hand-note {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 1.4rem; line-height: 1;
+  transform: rotate(-3deg);
+}
+.hand-note svg { width: 2rem; height: 2rem; position: static; }
+
+/* --- selection --- */
+::selection { background: #ff5c1f; color: #0a0a0c; }
+
+/* ════════════════════════════════════════
+   RESPONSIVENESS
+   ════════════════════════════════════════ */
+
+/* Correct viewport height on mobile browsers */
+@supports (height: 100svh) {
+  #top, #top > div { min-height: 100svh; }
+}
+
+/* Landscape phones */
+@media (max-height: 480px) and (orientation: landscape) {
+  #top, #top > div { min-height: auto; }
+  #top { padding: 6rem 0 3rem; }
+}
+
+/* Gallery becomes a native swipe carousel on touch sizes */
+@media (max-width: 768px) {
+  .gallery-card, .placeholder-card { flex-basis: 85vw; height: 460px; }
+  #gallery-track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+  }
+  #gallery-track > * { scroll-snap-align: center; }
+  #gallery-track::-webkit-scrollbar { display: none; }
+}
+
+/* Stats note sits below the number on small cards */
+@media (max-width: 640px) {
+  .stat-note { position: static; display: inline-block; margin-top: 0.75rem; }
+}
+
+/* Touch devices: restore native cursor */
+@media (hover: none) {
+  .cursor-ring, .cursor-dot { display: none; }
+  * { cursor: auto; }
+}
+
+/* Mobile menu */
+#mobile-menu {
+  position: fixed; inset: 0; z-index: 30;
+  background: rgba(10, 10, 12, 0.96);
+  backdrop-filter: blur(8px);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+#mobile-menu.is-open { opacity: 1; pointer-events: auto; }
+#mobile-menu a { font-family: "Instrument Serif", serif; font-size: 2.5rem; color: #e8e4dc; }
+#mobile-menu a.mail { font-family: Inter, sans-serif; font-size: 0.875rem; color: rgba(232, 228, 220, 0.6); }
+
+/* Hamburger */
+.menu-btn { display: flex; flex-direction: column; gap: 6px; padding: 4px; }
+.menu-btn span { width: 24px; height: 2px; background: #e8e4dc; transition: transform 0.3s; }
+.menu-btn.is-open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+.menu-btn.is-open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+@media (min-width: 768px) { .menu-btn { display: none; } }
+
+/* --- reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .cursor-ring, .cursor-dot { display: none; }
+  * { cursor: auto; }
+  .line-mask > span { transform: translateY(0); }
+  .eyebrow { opacity: 1; }
+}
