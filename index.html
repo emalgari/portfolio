@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saddam — The Atelier</title>
+  <meta name="description" content="Frontend developer. Cinematic web experiences. Stockholm.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'sans-serif'],
+            serif: ['"Instrument Serif"', 'ui-serif', 'serif'],
+          },
+          colors: {
+            ink:  '#0a0a0c',
+            bone: '#e8e4dc',
+            ember: '#ff5c1f',
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-ink text-bone">
+
+  <!-- ═══ Three.js silk-field background ═══ -->
+  <div id="bg-container" class="fixed inset-0"></div>
+
+  <!-- ═══ Vignette + film grain ═══ -->
+  <div class="vignette"></div>
+  <div class="noise"></div>
+
+  <!-- ═══ Custom cursor ═══ -->
+  <div class="cursor-ring"></div>
+  <div class="cursor-dot"></div>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-40 mix-blend-difference">
+    <div class="mx-auto flex max-w-[92rem] items-center justify-between px-6 py-6 lg:px-12">
+      <a href="#top" class="flex items-center gap-2.5 text-sm font-medium text-bone">
+        <span class="h-2 w-2 rounded-full bg-ember"></span>
+        Saddam
+        <span class="text-bone/40">/ atelier</span>
+      </a>
+      <nav class="hidden items-center gap-10 text-sm text-bone/80 md:flex">
+        <a href="#work" data-hover>Work</a>
+        <a href="#about" data-hover>About</a>
+        <a href="#contact" data-hover>Contact</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <a href="#contact" data-hover class="hidden items-center gap-2 text-sm text-bone sm:inline-flex">
+          <span class="h-2 w-2 animate-pulse rounded-full bg-ember"></span>
+          Stockholm, Sweden
+        </a>
+        <button id="menu-btn" class="menu-btn md:hidden" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ MOBILE MENU ═══ -->
+  <div id="mobile-menu">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="mailto:hello@emalgari.com" class="mail">emalgari@proton.me</a>
+  </div>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <section id="top" class="relative z-10 min-h-screen overflow-hidden">
+      <div class="relative z-10 flex min-h-screen items-end pb-24">
+        <div class="mx-auto w-full max-w-[92rem] px-6 lg:px-12">
+
+          <div class="grid items-center gap-14 lg:grid-cols-[1fr_auto] lg:gap-20">
+            <div>
+              <p class="eyebrow text-xs uppercase tracking-[0.4em] text-bone/50">
+                Frontend developer · Stockholm
+              </p>
+
+              <h1 class="mt-8 font-serif text-[clamp(2.6rem,11vw,11rem)] font-normal leading-[0.88] tracking-[-0.03em]">
+                <span class="line-mask block"><span>Interfaces</span></span>
+                <span class="line-mask block"><span>with weight,</span></span>
+                <span class="line-mask block italic text-ember"><span>timing,<svg class="mark underline" viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 13 C 42 7, 78 17, 116 11 C 150 6, 186 13, 216 10"/><path d="M12 19 C 60 14, 130 20, 208 16"/></svg></span></span>
+                <span class="line-mask block"><span>and intent.</span></span>
+              </h1>
+            </div>
+
+            <!-- portrait -->
+            <div class="portrait mx-auto lg:mx-0">
+              <div class="portrait-ring" aria-hidden="true"></div>
+              <div class="portrait-frame">
+                <img src="./assets/saddam.jpg" alt="Saddam, frontend developer in Stockholm" decoding="async">
+              </div>
+              <p class="hand hand-anim portrait-note">the companion himself
+                <svg class="mark" viewBox="0 0 100 120" aria-hidden="true"><path d="M16 112 C 20 66, 40 34, 80 14"/><path d="M66 12 L 84 10 L 76 30"/></svg>
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-intro mt-12 grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:items-end">
+            <p class="max-w-md text-bone/75">
+              I'm Saddam, a frontend developer who builds the kind of sites
+              that make clients forward them to their colleagues. React,
+              TypeScript, motion, and a lot of attention to the small things.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a href="#work" data-hover class="group inline-flex items-center gap-3 rounded-full bg-bone px-7 py-3.5 text-sm font-medium text-ink hover:bg-ember hover:text-bone">
+                View work
+                <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+              </a>
+              <a href="#contact" data-hover class="inline-flex items-center gap-3 rounded-full border border-bone/25 px-7 py-3.5 text-sm text-bone hover:border-bone">
+                Start a project
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-20 flex flex-wrap items-center gap-6 text-xs uppercase tracking-[0.3em] text-bone/40">
+            <span>Scroll</span>
+            <span class="h-px w-12 bg-bone/40"></span>
+            <span class="hand hand-note hand-anim normal-case tracking-normal">it's smooth — I promise
+              <svg class="mark" viewBox="0 0 100 120" aria-hidden="true"><path d="M16 8 C 20 52, 40 84, 80 104"/><path d="M66 102 L 84 108 L 76 88"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MARQUEE ═══ -->
+    <section class="relative z-10 overflow-hidden border-y border-bone/10 py-6">
+      <div class="marquee">
+        <span>Landing pages</span><span class="text-ember">✦</span>
+        <span>Product showcases</span><span class="text-ember">✦</span>
+        <span>Motion & 3D</span><span class="text-ember">✦</span>
+        <span>Agency sites</span><span class="text-ember">✦</span>
+        <span>Frontend rebuilds</span><span class="text-ember">✦</span>
+        <span>Landing pages</span><span class="text-ember">✦</span>
+        <span>Product showcases</span><span class="text-ember">✦</span>
+        <span>Motion & 3D</span><span class="text-ember">✦</span>
+        <span>Agency sites</span><span class="text-ember">✦</span>
+        <span>Frontend rebuilds</span><span class="text-ember">✦</span>
+      </div>
+    </section>
+
+    <!-- ═══ WORK — horizontal gallery ═══ -->
+    <section id="work" class="relative z-10 py-32">
+      <div class="mx-auto max-w-[92rem] px-6 lg:px-12">
+        <div class="mb-16 flex items-end justify-between md:mb-20">
+          <div>
+            <p class="eyebrow text-xs uppercase tracking-[0.4em] text-bone/50">01 — Selected work</p>
+            <h2 class="mt-4 font-serif text-[clamp(2.2rem,7vw,4.5rem)] md:text-7xl">
+              Recent <span class="italic text-ember">projects</span>
+            </h2>
+          </div>
+          <p class="hidden max-w-xs text-sm text-bone/60 md:block">
+            <span class="hand hand-note hand-anim mb-2 text-xl">scroll sideways
+              <svg class="mark" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 30 C 40 22, 76 26, 108 30"/><path d="M94 18 L 112 30 L 94 42"/></svg>
+            </span><br>
+            Each frame is a live project.
+          </p>
+        </div>
+      </div>
+
+      <div id="gallery-wrap">
+        <div id="gallery-track" class="flex gap-8 px-6 lg:px-12">
+          <!-- cards injected by app.js -->
+        </div>
+      </div>
+
+      <div class="mx-auto mt-16 max-w-[92rem] px-6 lg:px-12">
+        <p class="text-sm text-bone/60">
+          More case studies in production. Source code is open: clients can read it!
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section id="about" class="relative z-10 border-t border-bone/10 py-32">
+      <div class="mx-auto max-w-[92rem] px-6 lg:px-12">
+        <div class="grid gap-16 lg:grid-cols-12">
+          <div class="lg:col-span-5">
+            <p class="eyebrow text-xs uppercase tracking-[0.4em] text-bone/50">02 — About</p>
+            <h2 class="mt-4 font-serif text-[clamp(2.2rem,7vw,3.75rem)] leading-[0.95] lg:text-6xl">
+              A quiet <br>
+              <span class="italic text-ember">partner</span><br>
+              with sharp tools.
+            </h2>
+          </div>
+          <div class="space-y-6 text-bone/80 lg:col-span-7 lg:pl-12">
+            <p class="text-lg leading-relaxed md:text-xl">
+              My handle is <em class="font-serif text-bone annotation">emalgari<svg class="mark fit-name" viewBox="0 0 260 120" preserveAspectRatio="none" aria-hidden="true"><path d="M28 62 C 24 26, 96 8, 148 12 C 214 17, 244 42, 238 68 C 231 100, 140 116, 80 108 C 34 101, 20 86, 26 60"/></svg></em> —
+              the "e" for electronic, "malgari" for companion. That's what I aim
+              to be: the quiet person in the room who already solved the
+              problem before you finished describing it.
+            </p>
+            <p>
+              I came to frontend from teaching physics, which explains a lot.
+              I think about inertia, timing, and weight the way most
+              developers think about frameworks. I care about accessibility
+              and performance not because a linter said so, but because
+              someone somewhere is using what I built on a slow connection.
+            </p>
+            <p>
+              These days I work mostly with React, Next.js, and TypeScript.
+              When motion needs to earn its place I reach for GSAP. When it
+              needs to feel alive I reach for Three.js. When it just needs
+              to feel <em class="font-serif text-bone">premium</em>,
+              I reach for Lenis.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-24 grid grid-cols-2 gap-px bg-bone/10 md:grid-cols-4">
+          <div class="bg-ink p-6 md:p-8"><p class="font-serif text-4xl text-bone md:text-6xl">6<span class="text-ember">+</span></p><p class="mt-3 text-xs uppercase tracking-widest text-bone/50">Years shipping</p></div>
+          <div class="bg-ink p-6 md:p-8"><p class="font-serif text-4xl text-bone md:text-6xl">40<span class="text-ember">+</span></p><p class="mt-3 text-xs uppercase tracking-widest text-bone/50">Projects delivered</p></div>
+          <div class="relative bg-ink p-6 md:p-8">
+            <p class="font-serif text-4xl text-bone annotation md:text-6xl">60<svg class="mark underline" viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 13 C 42 7, 78 17, 116 11 C 150 6, 186 13, 216 10"/></svg></p>
+            <p class="mt-3 text-xs uppercase tracking-widest text-bone/50">fps standard</p>
+            <p class="hand hand-anim stat-note absolute right-4 top-4 text-xl" style="transform:rotate(-6deg)">non-negotiable.</p>
+          </div>
+          <div class="bg-ink p-6 md:p-8"><p class="font-serif text-4xl text-bone md:text-6xl">∞</p><p class="mt-3 text-xs uppercase tracking-widest text-bone/50">Cups of tea</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ STACK ══ -->
+    <section class="relative z-10 border-t border-bone/10 py-32">
+      <div class="mx-auto max-w-[92rem] px-6 lg:px-12">
+        <p class="eyebrow text-xs uppercase tracking-[0.4em] text-bone/50">03 — Stack</p>
+        <h2 class="mt-4 font-serif text-[clamp(2.2rem,7vw,3.75rem)] md:text-6xl">
+          Tools I <span class="italic text-ember">reach for</span>
+        </h2>
+
+        <div class="mt-12 grid gap-x-12 gap-y-10 md:mt-16 md:grid-cols-3">
+          <div>
+            <h3 class="text-xs uppercase tracking-[0.3em] text-ember">Frontend</h3>
+            <ul class="mt-6 space-y-3 font-serif text-2xl">
+              <li data-hover>React</li><li data-hover>Next.js</li><li data-hover>TypeScript</li><li data-hover>Tailwind</li><li data-hover>SASS</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xs uppercase tracking-[0.3em] text-ember">Motion & 3D</h3>
+            <ul class="mt-6 space-y-3 font-serif text-2xl">
+              <li data-hover>GSAP</li><li data-hover>Lenis</li><li data-hover>Three.js</li><li data-hover>WebGL</li><li data-hover>Framer Motion</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xs uppercase tracking-[0.3em] text-ember">Engineering</h3>
+            <ul class="mt-6 space-y-3 font-serif text-2xl">
+              <li data-hover>Node.js</li><li data-hover>Vite</li><li data-hover>Prisma</li><li data-hover>Docker</li><li data-hover>GitHub Actions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact" class="relative z-10 border-t border-bone/10 py-32 md:py-40">
+      <div class="mx-auto max-w-5xl px-6 text-center lg:px-12">
+        <p class="eyebrow text-xs uppercase tracking-[0.4em] text-bone/50">04 — Contact</p>
+        <h2 class="mt-6 font-serif text-[clamp(2rem,9vw,6rem)] leading-[0.9] md:text-8xl">
+          Let's build<br>
+          <span class="italic text-ember">something</span><br>
+          worth <span class="annotation">forwarding.<svg class="mark fit-heading" viewBox="0 0 520 140" preserveAspectRatio="none" aria-hidden="true"><path d="M30 74 C 24 34, 140 10, 268 10 C 402 10, 498 34, 494 72 C 490 110, 372 132, 244 130 C 128 128, 36 112, 32 76 C 28 56, 40 44, 54 42 C 74 34, 98 27, 120 22"/></svg></span>
+        </h2>
+        <p class="mx-auto mt-10 max-w-md text-bone/70">
+          I take on a small number of clients each quarter. Landing pages,
+          product showcases, frontend rebuilds. Tell me what you're building.
+        </p>
+        <div class="mt-14 flex flex-wrap justify-center gap-4">
+          <a href="mailto:hello@emalgari.com" data-hover class="inline-flex items-center gap-3 rounded-full bg-ember px-8 py-4 text-sm font-medium text-bone hover:bg-bone hover:text-ink">
+            emalgari@proton.me <span>→</span>
+          </a>
+          <a href="https://github.com/emalgari" data-hover class="inline-flex items-center gap-3 rounded-full border border-bone/25 px-8 py-4 text-sm text-bone hover:border-bone">
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="relative z-10 border-t border-bone/10">
+      <div class="mx-auto flex max-w-[92rem] flex-col items-center justify-between gap-4 px-6 py-8 text-xs text-bone/50 sm:flex-row lg:px-12">
+        <p>© 2026 Saddam · emalgari.com</p>
+        <p>Handcrafted. No templates. No shortcuts.</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
